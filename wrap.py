@@ -1,7 +1,7 @@
 import math
 import numpy as np
 
-from pygcode import Line, GCode, Machine
+from pygcode import Line, GCode, Machine, Position
 import pygcode
 from math import sin, cos
 
@@ -86,6 +86,8 @@ def main():
         with open(job[0], 'r') as fh, open(job[1], 'w') as out_fh:
             print("Writing:", job[1])
             m_orig = Machine()
+            start_pos = Position(axes=['X', 'Y', 'Z'], Z=1)
+            m_orig.pos = start_pos
             last_pos = None
             for line_text in fh.readlines():
                 line = Line(line_text)
